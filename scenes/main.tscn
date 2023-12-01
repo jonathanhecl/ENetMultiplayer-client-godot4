@@ -1,3 +1,26 @@
-[gd_scene format=3 uid="uid://bejq8llq7usny"]
+[gd_scene load_steps=3 format=3 uid="uid://bejq8llq7usny"]
+
+[ext_resource type="PackedScene" uid="uid://ddwud2oodii11" path="res://scenes/basic_player.tscn" id="1_c4lkj"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_h415j"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_h415j")
+player_scene = ExtResource("1_c4lkj")
+
+[node name="Connect" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Connect"
+
+[node name="Status" type="Label" parent="."]
+offset_left = 82.0
+offset_top = 4.0
+offset_right = 187.0
+offset_bottom = 27.0
+text = "Disconnected"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/basic_player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
