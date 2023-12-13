@@ -10,16 +10,14 @@ func _ready():
 	set_multiplayer_authority(name.to_int())
 
 func _input(event):
-	if !is_multiplayer_authority():
-		return
-		
-	if Input.is_action_just_pressed("ui_accept"):
-		if changed:
-			($Icon as Sprite2D).modulate = Color.WHITE
-			changed = false
-		else:
-			($Icon as Sprite2D).modulate = Color.RED
-			changed = true
+	if is_multiplayer_authority():
+		if Input.is_action_just_pressed("ui_accept"):
+			if changed:
+				($Icon as Sprite2D).modulate = Color.WHITE
+				changed = false
+			else:
+				($Icon as Sprite2D).modulate = Color.RED
+				changed = true
 
 func _physics_process(delta):
 	if is_multiplayer_authority():
