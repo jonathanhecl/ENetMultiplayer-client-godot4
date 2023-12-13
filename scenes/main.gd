@@ -7,10 +7,13 @@ func _process(delta):
 	var status = peer.get_connection_status()
 	if status == peer.CONNECTION_CONNECTED:
 		$Status.text = "Connected"
+		$Connect.hide()
 	elif status == peer.CONNECTION_CONNECTING:
 		$Status.text = "Connecting"
+		$Connect.hide()
 	else:
 		$Status.text = "Disconnected"
+		$Connect.show()
 
 func _on_connect_pressed():
 	multiplayer.connected_to_server.connect(_connected)
@@ -39,12 +42,17 @@ func _disconnected():
 	
 func add_peer(peer_id = 1):
 	var player = player_scene.instantiate()
+	
 	player.name = str(peer_id)
+	player.position.x = 574
+	player.position.y = 307
+	
 	call_deferred("add_child", player)
 
 func remove_peer(peer_id = 1):
 	for c in range(len(get_children())):
 		var ch = get_child(c)
 		if ch.is_in_group("player"):
-			if ch.name == peer_id:
+			if ch.name.to_int() == peer_id:
 				ch.queue_free()
+				break

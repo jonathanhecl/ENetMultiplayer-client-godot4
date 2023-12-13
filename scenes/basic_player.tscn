@@ -23,3 +23,11 @@ shape = SubResource("RectangleShape2D_oo3ai")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8asxc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -74.0
+offset_top = 74.0
+offset_right = 76.0
+offset_bottom = 97.0
+horizontal_alignment = 1
+autowrap_mode = 2
