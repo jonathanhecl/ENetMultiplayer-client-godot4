@@ -12,6 +12,11 @@ func _disconnected():
 	multiplayer.multiplayer_peer = null
 	$Status.text = "Disconnected"
 	$Connect.show()
+	
+	for c in range(len(get_children())):
+		var ch = get_child(c)
+		if ch.is_in_group("player"):
+			ch.queue_free()
 
 func _on_connect_pressed():
 	multiplayer.connected_to_server.connect(_connected)
@@ -37,7 +42,8 @@ func _peer_connected(peer_id):
 	add_peer(peer_id)
 
 func _peer_disconnected(peer_id):
-	if local_peer == peer_id:
+	if (local_peer == peer_id || # Me desconectan
+		peer_id == 1):  		 # Se cierra el servidor
 		local_peer = 0
 	
 	($ItemList as ItemList).add_item("OUT " + str(peer_id))
