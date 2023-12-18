@@ -23,4 +23,16 @@ text = "Disconnected"
 _spawnable_scenes = PackedStringArray("res://scenes/basic_player.tscn")
 spawn_path = NodePath("..")
 
+[node name="Label" type="Label" parent="."]
+offset_left = 574.0
+offset_top = 307.0
+offset_right = 591.0
+offset_bottom = 330.0
+text = "+"
+
+[node name="ItemList" type="ItemList" parent="."]
+offset_left = 966.0
+offset_right = 1151.0
+offset_bottom = 197.0
+
 [connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
