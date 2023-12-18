@@ -12,6 +12,8 @@ func _ready():
 func _input(event):
 	if is_multiplayer_authority():
 		if Input.is_action_just_pressed("ui_accept"):
+			get_parent().send_message_to_server.rpc("Yo " + $Label.text + " cambie de color")
+		
 			if changed:
 				($Icon as Sprite2D).modulate = Color.WHITE
 				changed = false

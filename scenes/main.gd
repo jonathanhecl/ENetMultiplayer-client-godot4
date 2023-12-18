@@ -35,6 +35,7 @@ func _peer_connected(peer_id):
 	if local_peer == 0:
 		local_peer = peer.get_unique_id()
 		peer_id = local_peer
+		send_message_to_server.rpc("Hola Server, soy " + str(local_peer))
 		
 	($ItemList as ItemList).add_item("IN " + str(peer_id))
 	
@@ -71,3 +72,13 @@ func remove_peer(peer_id):
 			if ch.name.to_int() == peer_id:
 				ch.queue_free()
 				break
+
+@rpc("any_peer")
+func send_message_to_server(message: String):
+	print("send_message_to_server: ", message)
+	if multiplayer.is_server():
+		send_message_to_client.rpc(message)
+		
+@rpc("authority")
+func send_message_to_client(message: String):
+	print("send_message_to_client: ", message)
